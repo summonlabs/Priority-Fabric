@@ -57,6 +57,24 @@ AddressSanitizer earned its place. The x86 run found a genuine **stack-use-after
 one call site passed a temporary. The decoder now owns its limits. That defect was invisible to
 every other check and is exactly the class of bug sanitizers exist to find.
 
+## Test timing policy
+
+No test has a timeout. Every suite runs plainly and is allowed to finish; a hanging test is a
+defect to diagnose, not something to cut short.
+
+Two bounded waits exist and both are *failure detectors*, never pass paths:
+
+* `wait_until` in the multiprocess harness polls for a child's ready file. If the bound is
+  reached the test **fails** with "the child never came up"; it can never turn a broken child
+  into a passing test.
+* `NodeClient::Options::io_deadline_ms` bounds how long a client can be blocked by a dead peer.
+  A deadline expiring always produces an error and never a successful result.
+
+The concurrency suite contains spin loops that wait for an invariant to become observable (for
+example, every reader having seen a rejection after `close()`). They are join conditions, not
+timeouts: the invariant is guaranteed once the runtime is closed, so a non-terminating spin would
+itself be the defect.
+
 ## Static analysis
 
 `cmake -B build-analyze -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS="/analyze"` followed by a

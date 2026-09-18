@@ -212,6 +212,9 @@ The multiprocess suite starts `pf_node` and `pf_probe` as separate operating-sys
 talks to them over real loopback TCP, kills them with the operating system's own termination and
 restarts them on the same state directory.
 
+No test has a timeout. Every suite runs plainly and is allowed to finish; the only bounded waits
+are failure detectors that can turn a dead peer into a failure, never into a pass.
+
 `docs/VALIDATION.md` records exactly what was measured, which build configurations were used, and
 which claims are `REAL`, which are `SYNTHETIC` and which are `UNSUPPORTED`.
 
