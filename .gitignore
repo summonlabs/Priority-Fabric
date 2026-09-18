@@ -1,0 +1,41 @@
+# Build trees
+build/
+build-*/
+out/
+cmake-build-*/
+_deps/
+
+# IDE / editor
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+*.sln.docstates
+
+# Compiled artifacts
+*.obj
+*.o
+*.a
+*.lib
+*.so
+*.dylib
+*.dll
+*.exe
+*.pdb
+*.ilk
+*.exp
+*.idb
+
+# Test / runtime debris
+*.log
+*.tmp
+*.pftmp
+Testing/
+crash-*
+core
+core.*
+*.dmp
+*.pfsnap
+*.pfj
+__pycache__/

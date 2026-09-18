@@ -1,0 +1,7 @@
+add_executable(pf_example_basic basic_priority.cpp)
+target_link_libraries(pf_example_basic PRIVATE PriorityFabric::priorityfabric)
+priority_fabric_apply_warnings(pf_example_basic)
+
+add_executable(pf_example_fencing fencing_and_recovery.cpp)
+target_link_libraries(pf_example_fencing PRIVATE PriorityFabric::priorityfabric)
+priority_fabric_apply_warnings(pf_example_fencing)
